@@ -1,9 +1,13 @@
 document.body.onload = function() {
 	console.log("content.js loaded")
+	addPocketLinkToAnswers();
 
-	//add button to all answers present while content.js is loaded
-	$(".AnswerActionBar").append("<a href=#><span class='pocket_button'>pocket</span></a>")
-
+	function addPocketLinkToAnswers(){
+		//add button to all answers present while content.js is loaded
+		//get all bars that dont have the link already
+		$("div.AnswerActionBar:not(:has(span.pocket_button))").append("<a href=#><span class='pocket_button'>pocket</span></a>")
+	}
+	
 	$("span.pocket_button").on("click", function(e){
 			console.log("get_answer_link")
 			var parent = $(this).parents(".Answer")
