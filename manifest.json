@@ -25,5 +25,6 @@
       "matches": ["http://*.quora.com/*", "https://*.quora.com/*"],
       "js": ["lib/jquery.js", "content.js"]
     }
-  ]
+  ],
+   "web_accessible_resources": ["icons/pocket.jpeg"]
 }

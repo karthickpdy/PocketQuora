@@ -22,7 +22,9 @@ document.body.onload = function() {
 	function addPocketLinkToAnswers(){
 		//add button to all answers present while content.js is loaded
 		//get all bars that dont have the link already
-		$("div.AnswerActionBar:not(:has(span.pocket_button))").append("<a href=#><span class='pocket_button'>pocket</span></a>")
+		var img =$('<img>')[0];
+		img.src= chrome.extension.getURL('icons/pocket.jpeg');
+		$("div.AnswerActionBar:not(:has(span.pocket_button))").append("<div class ='action_item'><a href=#><img height='12px' width ='12px' src="+img.src+"><span class='pocket_button'> Pocket</span></a></div>")
 	}
 	
 	$("span.pocket_button").on("click", function(e){
