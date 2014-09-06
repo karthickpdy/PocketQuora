@@ -1,6 +1,23 @@
+var old_answer_count;
+
+function getAnswerCount(){
+	var a = document.getElementsByClassName("AnswerActionBar").length;
+	return a;
+}
+	
+
 document.body.onload = function() {
-	console.log("content.js loaded")
+	console.log("content.js loaded");
+
+		
+	old_answer_count = getAnswerCount();
 	addPocketLinkToAnswers();
+
+	$('body').bind("DOMSubtreeModified",function(){
+		// console.log("INSIDE DOMSubtreeModified" + old_answer_count + "new count" + getAnswerCount());
+		if(old_answer_count != getAnswerCount())
+		addPocketLinkToAnswers();
+	});
 
 	function addPocketLinkToAnswers(){
 		//add button to all answers present while content.js is loaded
@@ -22,9 +39,8 @@ document.body.onload = function() {
 chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
 	switch(message.type) {
 		case "get_answers_count":
-			console.log("inside get_answers_count")
-			var ansCount = document.getElementsByClassName("Answer").length
-			alert(ansCount)
+			var a= getAnswerCount();
+			console.log("answer count called"+a)
 		break;
 	}
 });
