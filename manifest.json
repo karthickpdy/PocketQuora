@@ -1,0 +1,29 @@
+{
+  "name": "PocketQuora",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description" : "Pocket Quora answers",
+
+  "icons": { "16": "icons/quora-favicon.png", "48": "icons/quora-favicon.png", "128": "icons/quora-favicon.png" },
+  
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/quora-favicon.png",
+      "38": "icons/quora-favicon.png"
+    },
+    "default_title": "Pocket for Quora",
+    "default_popup": "browseraction/popup.html"
+  },
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["http://*.quora.com/*", "https://*.quora.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
