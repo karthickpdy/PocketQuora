@@ -28,6 +28,14 @@
   ],
    "web_accessible_resources": ["icons/pocket.jpeg"],
 
-  "content_security_policy": "script-src 'self' https://quora.com 'unsafe-eval'; object-src 'self'"
+  // "content_security_policy": "script-src 'self' https://quora.com 'unsafe-eval'; object-src 'self'",
+
+  "permissions": [
+    "http://*.quora.com/",
+    "https://*.quora.com/",
+    "https://*.getpocket.com/",
+    "http://*.getpocket.com/"
+
+  ]
 
 }

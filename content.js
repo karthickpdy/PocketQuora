@@ -5,29 +5,28 @@ function getAnswerCount(){
 	return a;
 }
 var accessToken = null;
+
 function getAccessToken(){
   if (!accessToken) {
     console.log('access token');
 
     var url = 'https://getpocket.com/v3/oauth/request';
-
+    var data = { "consumer_key": "31911-18716d45d16315514e88e09c",
+		  												"redirect_uri": "pocketapp1234:authorizationFinished" }
     $.ajax({
 		  url:url,
 		  type:"POST",
-		  data: JSON.stringify({ consumer_key: "31911-18716d45d16315514e88e09c",
-		  												redirect_uri: "pocketapp1234:authorizationFinished" } ),
-		  contentType:"application/json; charset=utf-8",
-		  dataType:"json",
-		  success: function(jqXhr){
+		  data: JSON.stringify(data),
+		  contentType:"application/json",
+		  success: function(data, textStatus, xhr){
 		  		console.log("success")
-		      accessToken = body.split('&')[0].split('=')[1];
+		      accessToken = data.split('=')[1];
 	        console.log("success")
 	        console.log("accessToken = "+accessToken)
-	      
 		  },
-		  error: function(jqXhr){
+		  error: function(xhr, textStatus, error){
 		  	console.log("failure")
-		  	console.log(jqXhr)
+		  	console.log(error)
 		  }
 		}) //post
   }//if
