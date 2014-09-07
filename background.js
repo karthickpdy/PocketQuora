@@ -62,8 +62,16 @@ function getRequestToken(){
 function authorizePocket() {
 	var url = API + "/auth/authorize?request_token="+REQUEST_TOKEN+"&redirect_uri="+REDIRECT_URI
 	window.open(url,'_blank');
-	isPocketAuthorized = true;
-	return;
+	addListenerToLookForSuccessfulAuthRedirect();
+}
+
+function addListenerToLookForSuccessfulAuthRedirect() {
+	// looks out for https://getpocket.com/auth/REDIRECT_URI in chrome indefinitely
+	// if it is found
+		// authorization is success
+		// set isPocketAuthorized = true
+		// getAccessToken()
+
 }
 
 function getAccessToken() {
