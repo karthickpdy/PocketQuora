@@ -34,8 +34,8 @@
     "http://*.quora.com/",
     "https://*.quora.com/",
     "https://*.getpocket.com/",
-    "http://*.getpocket.com/"
-
+    "http://*.getpocket.com/",
+    "storage"
   ]
 
 }

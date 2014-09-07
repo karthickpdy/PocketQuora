@@ -137,11 +137,17 @@ function addLinkToPocket(link, title) {
 }
 
 function putToLocalStorage(data) {
-// TODO
+	data = JSON.stringify(data)
+	chrome.storage.local.set(data, function(){
+  	console.log("successfully stored "+data); 
+  });
 }
 
 function getFromLocalStorage(key) {
-// TODO
+	chrome.storage.local.get(key, function(data){ 
+		console.log("successfully retrieved "+data);
+		return data;
+	});
 }
 
 function postNewLink(data) {
