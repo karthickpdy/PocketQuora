@@ -31,11 +31,13 @@ document.body.onload = function() {
 			var link = parent.find("div.ContentFooter span:first a").attr("href");
 			var fullLink = "https://quora.com"+link
 			console.log(fullLink)
-	})
+			//send msg to background script
+			chrome.runtime.sendMessage({type: "post_new_link", data: {link: fullLink, title: link}}, function(response) {});
 
+	});
 }
 
-
+// listener for messages from background script
 chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
 	switch(message.type) {
 		case "get_answers_count":
