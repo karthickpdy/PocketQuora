@@ -5,15 +5,9 @@ function getAnswerCount(){
 	return a;
 }
 
-	
-
 document.body.onload = function() {
 	console.log("content.js loaded");
 	
-	chrome.runtime.sendMessage({type: "access-token"}, function(response) {
-  
-});
-		
 	old_answer_count = getAnswerCount();
 	addPocketLinkToAnswers();
 

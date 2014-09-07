@@ -1,7 +1,7 @@
 window.onload = function() {
 	document.getElementById("button").onclick = function() {
 		chrome.extension.sendMessage({
-	        type: "answer_count"
+	        type: "authorize_pocket"
 	    });
 	}
 }
