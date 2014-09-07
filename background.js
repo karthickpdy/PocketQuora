@@ -70,35 +70,16 @@ function authorizePocket() {
 }
 
 function addListenerToLookForSuccessfulAuthRedirect() {
-	// looks out for https://getpocket.com/auth/REDIRECT_URI in chrome indefinitely
-	// if it is found
-		// authorization is success
-		// set isPocketAuthorized = true
-		// getAccessToken()
 		
-		// chrome.windows.getAll({populate:true},function(windows){
-  // windows.forEach(function(window){
-  //   chrome.tabs.getAllInWindow(window.id,function(tabs){
-  //     //collect all of the urls here, I will just log them instead
-  //     tabs.forEach(function(tab) {
-  //     	// body...
-      	chrome.tabs.onUpdated.addListener(function(tabid,changeInfo, new_tab){
+      	chrome.tabs.onUpdated.addListener(function updateListener(tabid,changeInfo, new_tab){
       		console.log(new_tab.url)
       		if(new_tab.url.search(REDIRECT_URI)==0)
       		{
       			console.log("Fired listener");
       			isPocketAuthorized=true;
-      			chrome.tabs.onUpdated.removeListener(function(){});
+      			chrome.tabs.onUpdated.removeListener(updateListener);
       		}
       	});
-//       	}
-//       }
-      
-//       );
-//     });
-//   });
-// });
-
 }
 
 function getAccessToken() {
