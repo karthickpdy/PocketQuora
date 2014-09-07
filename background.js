@@ -10,7 +10,7 @@
 
 
 // listening for an event / one-time requests
-// coming from the popup
+// coming from the popup and the content script
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
     switch(request.type) {
         case "authorize_pocket":
@@ -18,6 +18,10 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
         		getRequestToken();
         		console.log("REQUEST_TOKEN ="+REQUEST_TOKEN);
         	}
+        break;
+
+        case "post_new_link":
+        	postNewLink(request.data)
         break;
     }
     return true;
@@ -118,7 +122,9 @@ function getAccessToken() {
 		  	console.log(error)
 		  }
 		}) //post
-  
+
+		
+  putToLocalStorage({ACCESS_TOKEN: ACCESS_TOKEN});
   return ACCESS_TOKEN;
 }
 
@@ -131,7 +137,7 @@ function addLinkToPocket(link, title) {
 								access_token: ACCESS_TOKEN
 	}
 
-	if(access_token){
+	if(ACCESS_TOKEN){
 		$.ajax({
 		  url:url,
 		  type:"POST",
@@ -148,7 +154,30 @@ function addLinkToPocket(link, title) {
 		  }
 		}) //post	
 	} else {
-		console.log("invalid access_token="+access_token)
+		console.log("invalid access_token="+ACCESS_TOKEN)
 	}
 
+}
+
+function putToLocalStorage(data) {
+	data = JSON.stringify(data)
+	chrome.storage.local.set(data, function(){
+  	console.log("successfully stored "+data); 
+  });
+}
+
+function getFromLocalStorage(key) {
+	chrome.storage.local.get(key, function(data){ 
+		console.log("successfully retrieved "+data);
+		return data;
+	});
+}
+
+function postNewLink(data) {
+	ACCESS_TOKEN = ACCESS_TOKEN || getFromLocalStorage("ACCESS_TOKEN");
+	if(ACCESS_TOKEN) {	
+		addLinkToPocket(data.link, data.title);
+	} else {
+		console.log("ACCESS_TOKEN error")
+	}
 }
