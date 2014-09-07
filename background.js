@@ -1,3 +1,14 @@
+/** REFERENCE
+	POCKET API documentation
+	Step 1: Obtain a platform consumer key
+	Step 2: Obtain a request token
+	Step 3: Redirect user to Pocket to continue authorization
+	Step 4: Receive the callback from Pocket
+	Step 5: Convert a request token into a Pocket access token
+	Step 6: Make authenticated requests to Pocket
+**/
+
+
 // listening for an event / one-time requests
 // coming from the popup
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
