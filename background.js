@@ -25,7 +25,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 
 var REQUEST_TOKEN = null;
 var CONSUMER_KEY = "31911-18716d45d16315514e88e09c";
-var REDIRECT_URI = "quora.com";
+var REDIRECT_URI = "https://www.google.co.in";
 var API = "https://getpocket.com";
 var ACCESS_TOKEN = null;
 
@@ -71,6 +71,29 @@ function addListenerToLookForSuccessfulAuthRedirect() {
 		// authorization is success
 		// set isPocketAuthorized = true
 		// getAccessToken()
+		
+		// chrome.windows.getAll({populate:true},function(windows){
+  // windows.forEach(function(window){
+  //   chrome.tabs.getAllInWindow(window.id,function(tabs){
+  //     //collect all of the urls here, I will just log them instead
+  //     tabs.forEach(function(tab) {
+  //     	// body...
+      	chrome.tabs.onUpdated.addListener(function(tabid,changeInfo, new_tab){
+      		console.log(new_tab.url)
+      		if(new_tab.url.search(REDIRECT_URI)==0)
+      		{
+      			console.log("Fired listener");
+      			isPocketAuthorized=true;
+      			chrome.tabs.onUpdated.removeListener(function(){});
+      		}
+      	});
+//       	}
+//       }
+      
+//       );
+//     });
+//   });
+// });
 
 }
 
