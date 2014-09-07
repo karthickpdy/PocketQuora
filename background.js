@@ -99,6 +99,33 @@ function getAccessToken() {
   return ACCESS_TOKEN;
 }
 
-function addLinkToPocket(link) {
+function addLinkToPocket(link, title) {
 	var url = API + "/v3/add";
+	var data = {
+								url: link,
+								title: title,
+								consumer_key: CONSUMER_KEY,
+								access_token: ACCESS_TOKEN
+	}
+
+	if(access_token){
+		$.ajax({
+		  url:url,
+		  type:"POST",
+		  data: JSON.stringify(data),
+		  contentType:"application/json",
+		  dataType: "json",
+		  success: function(data, textStatus, xhr){
+		  		console.log("success")
+		  		console.log("Status = "+data["status"])
+		  },
+		  error: function(xhr, textStatus, error){
+		  	console.log("failure")
+		  	console.log(error)
+		  }
+		}) //post	
+	} else {
+		console.log("invalid access_token="+access_token)
+	}
+
 }
